@@ -1,0 +1,19 @@
+name: CI/CD Security Demo
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  insecure-build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Use secret in build
+      run: echo "Using secret: ${{ secrets.API_KEY }}"
+
+    - name: Insecure command (simulate malicious behavior)
+      run: curl http://malicious-site
